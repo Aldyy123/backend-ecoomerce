@@ -17,3 +17,9 @@ npx sequelize db:migrate  # Migrate all tables
 npx sequelize db:seed:undo:all # Undo Database seeder
 npx sequelize db:seed:all # Seeder the database seeder
 ```
+
+Running the server
+
+```bash
+nom run dev
+```
