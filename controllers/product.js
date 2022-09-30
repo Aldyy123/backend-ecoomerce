@@ -32,7 +32,9 @@ class Controller {
             if (!data) {
                 throw { name: 'data not found' }
             }
-            let product = await Product.destroy({ where: { id } })
+            await Product.destroy({ where: { id } })
+            const history = await historyController.newHistory(req.user.id, data.description || 'Data deleted', `new entity with ${data.id} deleted`)
+            if (history.name === "Error") throw { message: 'History failed' }
             res.status(200).json({ message: `id ${id} success to delete` })
 
         } catch (error) {

@@ -22,7 +22,7 @@ const authorization = async (req, res, next) => {
       throw { message: "Data not found" }
     }
     if (req.user.role === 'Staff' && product.AuthorId === req.user.id) {
-      throw { message: "Staff not only change" }
+      return next()
     } else if (req.user.role === 'Admin') {
       return next()
     } else {
