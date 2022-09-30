@@ -57,17 +57,40 @@ module.exports = (sequelize, DataTypes) => {
         min: {
           args: 50000,
           msg: "Minimum price 50000",
+        },
+        isNumeric: {
+          msg: "Price harus angka"
         }
       }
     },
     stock: DataTypes.INTEGER,
     imgUrl: DataTypes.STRING,
-    CategoryId: DataTypes.INTEGER,
+    CategoryId: {
+      type : DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Category Id tidak boleh kosong'
+        },
+        notEmpty: {
+          msg: 'Category Id tidak boleh kosong'
+        },
+        isInt: {
+          msg: 'Category Id harus angka'
+        }
+      }
+    },
     AuthorId: DataTypes.INTEGER,
     status: {
       type: DataTypes.ENUM,
       values: ['Active', 'Inactive', 'Archived'],
       defaultValue: 'Active',
+      validate: {
+        isIn: {
+          msg : 'Type hanya bisa di masukan Active, Inactive, or Archived',
+          args: ['Active', 'Inactive', 'Archived']
+        }
+      }
     }
   }, {
     sequelize,
